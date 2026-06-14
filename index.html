@@ -496,6 +496,9 @@
         <button class="action-btn" id="btn-route">🔴 ここへのルートを表示</button>
         <button class="action-btn" id="btn-close-detail">✕ 閉じる</button>
       </div>
+      <div style="margin-top:8px">
+        <button class="action-btn" id="btn-report" style="background:#f0f4f8;color:#607080;font-size:13px">📧 情報を追加・修正する</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1481,6 +1484,18 @@ document.getElementById("btn-close-detail").addEventListener("click", closeDetai
 
 // ルート
 document.getElementById("btn-route").addEventListener("click", drawRoute);
+
+// 情報追加メール
+document.getElementById("btn-report").addEventListener("click", () => {
+  if (!selectedToilet) return;
+  const t = selectedToilet;
+  const to = "yosimutu@gmail.com";
+  const subject = encodeURIComponent(`【トイレ情報追加・修正】${t.name}`);
+  const body = encodeURIComponent(
+    `施設名：${t.name}\n住所：${t.address}\n\n【追加・修正したい情報をご記入ください】\n\n`
+  );
+  window.open(`mailto:${to}?subject=${subject}&body=${body}`, "_blank");
+});
 
 // オーバーレイ
 document.getElementById("overlay").addEventListener("click", () => {
